@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="ar" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+    <title>i Love you my Salloumti ❤️</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        themeRed: '#ff2a5f',
+                        themePink: '#ff7597',
+                        darkBg: '#060208',
+                    },
+                    fontFamily: {
+                        sans: ['Outfit', 'Cairo', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+        }
+
+        body {
+            font-family: 'Outfit', 'Cairo', sans-serif;
+            background-color: #060208;
+            color: #ffffff;
+            overflow-x: hidden;
+            width: 100vw;
+            min-height: 100vh;
+            min-height: -webkit-fill-available;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            overflow-y: auto;
+        }
+
+        /* Ambient glowing atmosphere */
+        .ambient-glow {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 95vw;
+            max-width: 750px;
+            height: 95vw;
+            max-height: 750px;
+            background: radial-gradient(circle, var(--theme-glow-color, rgba(255, 42, 95, 0.22)) 0%, rgba(136, 14, 79, 0.08) 50%, rgba(6, 2, 8, 0) 75%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 1;
+            transition: background 0.8s ease;
+            animation: pulse-glow 3s infinite ease-in-out;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { transform: translate(-50%, -50%) scale(0.95); opacity: 0.8; }
+            50% { transform: translate(-50%, -50%) scale(1.08); opacity: 1; }
+        }
+
+        /* Title beating heart icon */
+        .title-heart {
+            display: inline-block;
+            color: var(--theme-primary, #ff2a5f);
+            filter: drop-shadow(0 0 12px var(--theme-primary, #ff2a5f));
+            animation: heart-beat 1.2s infinite ease-in-out;
+        }
+
+        @keyframes heart-beat {
+            0%, 100% { transform: scale(1); }
+            14% { transform: scale(1.25); }
+            28% { transform: scale(1); }
+            42% { transform: scale(1.15); }
+            70% { transform: scale(1); }
+        }
+
+        /* Love Phrase Item Styling - Clear and Uncrowded */
+        .love-phrase {
+            position: absolute;
+            transform: translate(-50%, -50%) scale(0.3);
+            font-weight: 600;
+            white-space: nowrap;
+            opacity: 0;
+            transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.35s ease, color 0.3s ease, text-shadow 0.3s ease;
+            cursor: pointer;
+            user-select: none;
+            z-index: 10;
+            padding: 1px 3px;
+            border-radius: 4px;
+            line-height: 1;
+        }
+
+        .love-phrase.revealed {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .love-phrase:active, .love-phrase.highlighted {
+            transform: translate(-50%, -50%) scale(1.4) !important;
+            color: #ffffff !important;
+            text-shadow: 0 0 12px var(--theme-primary, #ff2a5f), 0 0 24px var(--theme-primary, #ff2a5f) !important;
+            z-index: 50 !important;
+            background: rgba(6, 2, 8, 0.9);
+        }
+
+        .love-phrase.dimmed {
+            opacity: 0.1 !important;
+            transform: translate(-50%, -50%) scale(0.6) !important;
+        }
+
+        /* Glassmorphism Panel UI */
+        .glass-panel {
+            background: rgba(18, 8, 22, 0.82);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.45);
+        }
+
+        /* Custom Scrollbars */
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #060208;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 42, 95, 0.4);
+            border-radius: 4px;
+        }
+
+        :root {
+            --theme-primary: #ff2a5f;
+            --theme-secondary: #ff7597;
+            --theme-glow-color: rgba(255, 42, 95, 0.22);
+        }
+    </style>
+</head>
+<body class="p-2 sm:p-4 relative select-none">
+
+    <!-- Ambient Glow Effect -->
+    <div class="ambient-glow" id="ambientGlow"></div>
+
+    <!-- Particle Canvas -->
+    <canvas id="bgCanvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
+
+    <!-- Background Video -->
+    <div class="fixed inset-0 w-full h-full pointer-events-none z-0 opacity-20 overflow-hidden">
+        <video id="bgVideo" autoplay loop muted playsinline preload="auto" class="w-full h-full object-cover">
+            <source src="ssstik.io_1792516048321.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <!-- Header Section -->
+    <header class="z-20 text-center mt-1 mb-1 flex flex-col items-center w-full max-w-4xl px-2">
+        <div class="flex items-center justify-center gap-2">
+            <h1 class="text-lg sm:text-3xl md:text-4xl font-bold tracking-wide text-pink-50 font-serif">
+               i Love you <span class="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-rose-500">my Salloumti</span>
+            </h1>
+            <span class="title-heart text-lg sm:text-2xl md:text-3xl"><i class="fa-solid fa-heart"></i></span>
+        </div>
+        <p class="text-pink-200/70 text-[9px] sm:text-xs mt-0.5 tracking-wider uppercase font-light">
+            Ancient & Modern Expressions of Love
+        </p>
+    </header>
+
+    <!-- Main Heart Container -->
+    <main class="relative flex-1 w-full max-w-5xl flex items-center justify-center my-1 z-10 min-h-[400px] sm:min-h-[600px]">
+        <canvas id="heartCanvas" class="absolute inset-0 w-full h-full pointer-events-none z-0"></canvas>
+        <div id="heartWordsContainer" class="relative w-full h-full max-w-[380px] max-h-[380px] sm:max-w-[780px] sm:max-h-[780px] flex items-center justify-center">
+        </div>
+    </main>
+
+    <!-- Footer Controls Bar -->
+    <footer class="z-25 w-full max-w-xl flex flex-col items-center gap-1.5 mb-2 px-2">
+        <div class="w-full glass-panel px-3 py-1.5 rounded-xl flex flex-row items-center justify-between gap-2 border border-pink-500/20">
+            <div id="statusMessage" class="text-[10px] sm:text-xs font-medium text-pink-200/90 tracking-wide flex items-center gap-1.5 truncate max-w-[65%]">
+                <i class="fa-solid fa-sparkles text-pink-400"></i>
+                <span id="statusText" class="truncate">Building heart of 110 languages...</span>
+            </div>
+            
+            <div class="flex items-center gap-2">
+                <div class="w-16 sm:w-28 bg-white/10 h-1.5 rounded-full overflow-hidden">
+                    <div id="progressBar" class="bg-gradient-to-r from-pink-500 to-rose-400 h-full w-0 transition-all duration-100"></div>
+                </div>
+                <span id="counterText" class="text-[11px] font-mono font-bold text-pink-300 min-w-[45px] text-right">0 / 110</span>
+            </div>
+        </div>
+
+        <div class="glass-panel p-1.5 rounded-2xl flex items-center justify-between gap-1 px-3 border border-pink-500/25 w-full">
+            <div class="relative flex-1 min-w-[90px] max-w-[150px]">
+                <i class="fa-solid fa-magnifying-glass absolute left-2 top-1/2 -translate-y-1/2 text-pink-300/50 text-[10px]"></i>
+                <input type="text" id="searchInput" placeholder="Search..." class="w-full bg-white/5 border border-pink-500/20 rounded-full py-1 pl-6 pr-2 text-[11px] text-white placeholder-pink-300/40 focus:outline-none focus:border-pink-500 transition">
+                <button id="btnClearSearch" class="hidden absolute right-1.5 top-1/2 -translate-y-1/2 text-pink-300/50 hover:text-white text-xs">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="flex items-center gap-1">
+                <button id="btnMusic" title="Audio Toggle" class="p-1.5 rounded-full hover:bg-pink-500/20 text-pink-200 hover:text-white transition active:scale-95 flex items-center gap-1 text-[11px]">
+                    <i id="musicIcon" class="fa-solid fa-volume-high text-xs text-pink-400"></i>
+                    <span class="hidden sm:inline">Sound</span>
+                </button>
+
+                <button id="btnReplay" title="Replay" class="p-1.5 rounded-full hover:bg-pink-500/20 text-pink-200 hover:text-white transition active:scale-95 flex items-center gap-1 text-[11px]">
+                    <i class="fa-solid fa-rotate-right text-xs"></i>
+                    <span class="hidden sm:inline">Replay</span>
+                </button>
+
+                <button id="btnTheme" title="Theme" class="p-1.5 rounded-full hover:bg-pink-500/20 text-pink-200 hover:text-white transition active:scale-95 flex items-center gap-1 text-[11px]">
+                    <i class="fa-solid fa-palette text-xs"></i>
+                    <span class="hidden sm:inline">Theme</span>
+                </button>
+
+                <button id="btnList" title="List" class="p-1.5 rounded-full hover:bg-pink-500/20 text-pink-200 hover:text-white transition active:scale-95 flex items-center gap-1 text-[11px]">
+                    <i class="fa-solid fa-list-ul text-xs"></i>
+                    <span class="hidden sm:inline">List</span>
+                </button>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Details Modal -->
+    <div id="detailModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4 transition-opacity duration-300 opacity-0">
+        <div class="glass-panel w-full max-w-xs rounded-3xl p-4 relative flex flex-col items-center text-center border border-pink-500/30 transform transition-all duration-300 scale-95" id="detailCard">
+            <button id="btnCloseDetail" class="absolute top-3 right-3 text-pink-300/60 hover:text-white text-base w-7 h-7 rounded-full flex items-center justify-center bg-white/5 border border-white/10 hover:bg-pink-500/20 transition">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            
+            <span id="detailFlag" class="text-3xl mb-1 filter drop-shadow-md">🌐</span>
+            <h3 id="detailLang" class="text-lg font-bold text-white mb-0.5">Language</h3>
+            <p id="detailCountry" class="text-[9px] text-pink-300/70 uppercase tracking-widest font-semibold mb-2.5">Country / Era</p>
+            
+            <div class="bg-white/5 border border-pink-500/20 rounded-2xl p-2.5 w-full mb-3">
+                <p id="detailText" class="text-xl font-bold text-pink-300 mb-1">Text</p>
+                <p id="detailPronunciation" class="text-[11px] italic text-pink-100/60">"Pronunciation"</p>
+            </div>
+
+            <button id="btnSpeak" class="w-full py-2 rounded-xl bg-gradient-to-r from-pink-500 to-rose-600 text-white font-semibold text-xs hover:opacity-90 active:scale-98 transition flex items-center justify-center gap-2 shadow-lg shadow-pink-500/20">
+                <i class="fa-solid fa-volume-high"></i> Speak Phrase Again
+            </button>
+        </div>
+    </div>
+
+    <!-- All Languages Modal -->
+    <div id="listModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden flex items-center justify-center p-3 transition-opacity duration-300 opacity-0">
+        <div class="glass-panel w-full max-w-md rounded-3xl p-4 relative max-h-[75vh] flex flex-col border border-pink-500/30">
+            <!-- Close Button (X) -->
+            <button id="btnCloseList" class="absolute top-3 right-3 text-pink-300/70 hover:text-white text-base w-8 h-8 rounded-full flex items-center justify-center bg-white/10 border border-white/10 hover:bg-pink-500/30 transition z-10">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <h3 class="text-base font-bold text-white mb-0.5 flex items-center gap-2">
+                <i class="fa-solid fa-heart text-pink-500"></i> All 110 Translations
+            </h3>
+            <p class="text-[9px] text-pink-300/70 mb-2">Click any item to speak & locate on heart</p>
+            
+            <div id="modalListContent" class="overflow-y-auto space-y-1.5 pr-1 text-xs text-pink-100/90 flex-1">
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        const languagesData = [
+            { id: 1, lang: "Ancient Egyptian", text: "Meryi-et-f", country: "Ancient Egypt", flag: "𓋹", font: "sans-serif", pron: "Meryi-et-f", speechLang: "ar-EG" },
+            { id: 2, lang: "Ancient Greek", text: "Σὲ φιλῶ", country: "Ancient Greece", flag: "🏛️", font: "Outfit", pron: "Se philō", speechLang: "el-GR" },
+            { id: 3, lang: "Aramaic", text: "רחמנא לך", country: "Ancient Near East", flag: "📜", font: "sans-serif", pron: "Rachmina lakh", speechLang: "he-IL" },
+            { id: 4, lang: "Sumerian", text: "ki-ag₂-ŋu₁₀", country: "Mesopotamia", flag: "🏺", font: "Outfit", pron: "Ki ag ngu", speechLang: "en-US" },
+            { id: 5, lang: "Babylonian", text: "Aramka", country: "Babylon", flag: "🏛️", font: "Outfit", pron: "Ah-ram-kah", speechLang: "ar-SA" },
+            { id: 6, lang: "Coptic", text: "ϯμεⲛⲓⲧⲕ", country: "Egypt", flag: "🇪🇬", font: "Outfit", pron: "Ti-menrit-k", speechLang: "el-GR" },
+            { id: 7, lang: "Phoenician", text: "Ahavtok", country: "Ancient Levant", flag: "⛵", font: "sans-serif", pron: "Ahavtok", speechLang: "he-IL" },
+            { id: 8, lang: "Old Norse", text: "Ek elska þik", country: "Scandinavia", flag: "⚔️", font: "Outfit", pron: "Ek els-ka theek", speechLang: "is-IS" },
+            { id: 9, lang: "Latin", text: "Te amo", country: "Ancient Rome", flag: "🏛️", font: "Playfair Display", pron: "Tay ah-moh", speechLang: "it-IT" },
+            { id: 10, lang: "Gothic", text: "Frijos thuk", country: "Ancient Europe", flag: "🛡️", font: "Outfit", pron: "Free-yos thook", speechLang: "de-DE" },
+            { id: 11, lang: "Arabic", text: "أحبك", country: "Arab World", flag: "🇸🇦", font: "Cairo", pron: "Uhibbuki / Uhibbuka", speechLang: "ar-SA" },
+            { id: 12, lang: "English", text: "I love you", country: "Worldwide", flag: "🇬🇧", font: "Outfit", pron: "I love you", speechLang: "en-US" },
+            { id: 13, lang: "French", text: "Je t'aime", country: "France", flag: "🇫🇷", font: "Playfair Display", pron: "Zhuh tem", speechLang: "fr-FR" },
+            { id: 14, lang: "Spanish", text: "Te amo", country: "Spain / LatAm", flag: "🇪🇸", font: "Outfit", pron: "Tay ah-moh", speechLang: "es-ES" },
+            { id: 15, lang: "Italian", text: "Ti amo", country: "Italy", flag: "🇮🇹", font: "Playfair Display", pron: "Tee ah-moh", speechLang: "it-IT" },
+            { id: 16, lang: "German", text: "Ich liebe dich", country: "Germany", flag: "🇩🇪", font: "Outfit", pron: "Ikh leeb-uh deekh", speechLang: "de-DE" },
+            { id: 17, lang: "Japanese", text: "愛してる", country: "Japan", flag: "🇯🇵", font: "sans-serif", pron: "Aishiteru", speechLang: "ja-JP" },
+            { id: 18, lang: "Chinese", text: "我爱你", country: "China", flag: "🇨🇳", font: "sans-serif", pron: "Wǒ ài nǐ", speechLang: "zh-CN" },
+            { id: 19, lang: "Korean", text: "사랑해", country: "South Korea", flag: "🇰🇷", font: "sans-serif", pron: "Saranghae", speechLang: "ko-KR" },
+            { id: 20, lang: "Russian", text: "Я тебя люблю", country: "Russia", flag: "🇷🇺", font: "Outfit", pron: "Ya tebya lyublyu", speechLang: "ru-RU" },
+            { id: 21, lang: "Turkish", text: "Seni seviyorum", country: "Turkey", flag: "🇹🇷", font: "Outfit", pron: "Seh-nee seh-vee-yoh-room", speechLang: "tr-TR" },
+            { id: 22, lang: "Hindi", text: "मैं तुमसे प्यार करता हूँ", country: "India", flag: "🇮🇳", font: "sans-serif", pron: "Main tumse pyar karta hoon", speechLang: "hi-IN" },
+            { id: 23, lang: "Urdu", text: "میں تم سے محبت کرتا ہوں", country: "Pakistan", flag: "🇵🇰", font: "Cairo", pron: "Main aap se mohabbat karta hoon", speechLang: "ur-PK" },
+            { id: 24, lang: "Swahili", text: "Nakupenda", country: "East Africa", flag: "🇰🇪", font: "Outfit", pron: "Nah-koo-pen-dah", speechLang: "sw-KE" },
+            { id: 25, lang: "Indonesian", text: "Aku cinta kamu", country: "Indonesia", flag: "🇮🇩", font: "Outfit", pron: "Ah-koo chin-tah kah-moo", speechLang: "id-ID" },
+            { id: 26, lang: "Portuguese", text: "Eu te amo", country: "Brazil / Portugal", flag: "🇧🇷", font: "Outfit", pron: "Eh-oo chee ah-moh", speechLang: "pt-BR" },
+            { id: 27, lang: "Dutch", text: "Ik hou van jou", country: "Netherlands", flag: "🇳🇱", font: "Outfit", pron: "Ik how fan yow", speechLang: "nl-NL" },
+            { id: 28, lang: "Greek", text: "Σ' αγαπώ", country: "Greece", flag: "🇬🇷", font: "Outfit", pron: "S'agapo", speechLang: "el-GR" },
+            { id: 29, lang: "Bengali", text: "আমি তোমাকে ভালোবাসি", country: "Bangladesh / India", flag: "🇧🇩", font: "sans-serif", pron: "Ami tomake bhalobashi", speechLang: "bn-BD" },
+            { id: 30, lang: "Persian", text: "دوستت دارم", country: "Iran", flag: "🇮🇷", font: "Cairo", pron: "Doosat daram", speechLang: "fa-IR" },
+            { id: 31, lang: "Swedish", text: "Jag älskar dig", country: "Sweden", flag: "🇸🇪", font: "Outfit", pron: "Yah elskar dey", speechLang: "sv-SE" },
+            { id: 32, lang: "Polish", text: "Kocham Cię", country: "Poland", flag: "🇵🇱", font: "Outfit", pron: "Ko-kham chye", speechLang: "pl-PL" },
+            { id: 33, lang: "Tagalog", text: "Mahal kita", country: "Philippines", flag: "🇵🇭", font: "Outfit", pron: "Mah-hal kee-tah", speechLang: "fil-PH" },
+            { id: 34, lang: "Vietnamese", text: "Tôi yêu bạn", country: "Vietnam", flag: "🇻🇳", font: "Outfit", pron: "Toy yew ban", speechLang: "vi-VN" },
+            { id: 35, lang: "Thai", text: "ฉันรักคุณ", country: "Thailand", flag: "🇹🇭", font: "sans-serif", pron: "Chan rak khun", speechLang: "th-TH" },
+            { id: 36, lang: "Czech", text: "Miluji tě", country: "Czech Republic", flag: "🇨🇿", font: "Outfit", pron: "Mee-loo-yee tyeh", speechLang: "cs-CZ" },
+            { id: 37, lang: "Hungarian", text: "Szeretlek", country: "Hungary", flag: "🇭🇺", font: "Outfit", pron: "Seh-ret-lek", speechLang: "hu-HU" },
+            { id: 38, lang: "Romanian", text: "Te iubesc", country: "Romania", flag: "🇷🇴", font: "Outfit", pron: "Tay yoo-besk", speechLang: "ro-RO" },
+            { id: 39, lang: "Danish", text: "Jeg elsker dig", country: "Denmark", flag: "🇩🇰", font: "Outfit", pron: "Yay els-ker dah", speechLang: "da-DK" },
+            { id: 40, lang: "Finnish", text: "Minä rakastan sinua", country: "Finland", flag: "🇫🇮", font: "Outfit", pron: "Mee-nah rah-kas-tan see-noo-ah", speechLang: "fi-FI" },
+            { id: 41, lang: "Norwegian", text: "Jeg elsker deg", country: "Norway", flag: "🇳🇴", font: "Outfit", pron: "Yay els-ker day", speechLang: "nb-NO" },
+            { id: 42, lang: "Ukrainian", text: "Я тебе кохаю", country: "Ukraine", flag: "🇺🇦", font: "Outfit", pron: "Ya tebe kohayu", speechLang: "uk-UA" },
+            { id: 43, lang: "Hebrew", text: "אני אוהב אותך", country: "Israel", flag: "🇮🇱", font: "sans-serif", pron: "Ani ohev otach", speechLang: "he-IL" },
+            { id: 44, lang: "Hawaiian", text: "Aloha wau iā 'oe", country: "Hawaii", flag: "🌺", font: "Outfit", pron: "Ah-loh-hah vow ee-ah oh-eh", speechLang: "en-US" },
+            { id: 45, lang: "Irish", text: "Taim i ngra leat", country: "Ireland", flag: "🇮🇪", font: "Outfit", pron: "Thawim ee ngraw lyat", speechLang: "ga-IE" },
+            { id: 46, lang: "Gaelic", text: "Tha gaol agam ort", country: "Scotland", flag: "🏴󠁧󠁢󠁳󠁣󠁴󠁿", font: "Outfit", pron: "Ha geul akum orsht", speechLang: "gd-GB" },
+            { id: 47, lang: "Welsh", text: "Rwy'n dy garu di", country: "Wales", flag: "🏴󠁧󠁢󠁷󠁬󠁳󠁿", font: "Outfit", pron: "Roo-in duh gah-ree dee", speechLang: "cy-GB" },
+            { id: 48, lang: "Esperanto", text: "Mi amas vin", country: "International", flag: "🌐", font: "Outfit", pron: "Mee ah-mas veen", speechLang: "eo" },
+            { id: 49, lang: "Malay", text: "Saya sayang kamu", country: "Malaysia", flag: "🇲🇾", font: "Outfit", pron: "Sah-yah sah-yang kah-moo", speechLang: "ms-MY" },
+            { id: 50, lang: "Kurdish", text: "Ez te hez dikim", country: "Kurdistan", flag: "☀️", font: "Outfit", pron: "Ez tay hez dee-keem", speechLang: "ku" },
+            { id: 51, lang: "Albanian", text: "Të dua", country: "Albania", flag: "🇦🇱", font: "Outfit", pron: "Tuh doo-ah", speechLang: "sq-AL" },
+            { id: 52, lang: "Armenian", text: "Ես քեզ սիրում եմ", country: "Armenia", flag: "🇦🇲", font: "sans-serif", pron: "Yes kez sirum em", speechLang: "hy-AM" },
+            { id: 53, lang: "Georgian", text: "მიყვარხার", country: "Georgia", flag: "🇬🇪", font: "sans-serif", pron: "Mikhvarkhar", speechLang: "ka-GE" },
+            { id: 54, lang: "Serbian", text: "Волим те", country: "Serbia", flag: "🇷🇸", font: "Outfit", pron: "Volim te", speechLang: "sr-RS" },
+            { id: 55, lang: "Croatian", text: "Volim te", country: "Croatia", flag: "🇭🇷", font: "Outfit", pron: "Volim te", speechLang: "hr-HR" },
+            { id: 56, lang: "Slovak", text: "Ľúbim ťa", country: "Slovakia", flag: "🇸🇰", font: "Outfit", pron: "Lyoo-beem tyah", speechLang: "sk-SK" },
+            { id: 57, lang: "Bulgarian", text: "Обичам те", country: "Bulgaria", flag: "🇧🇬", font: "Outfit", pron: "Obicham te", speechLang: "bg-BG" },
+            { id: 58, lang: "Lithuanian", text: "Aš tave myliu", country: "Lithuania", flag: "🇱🇹", font: "Outfit", pron: "Ash tah-veh mee-lyoo", speechLang: "lt-LT" },
+            { id: 59, lang: "Latvian", text: "Es tevi mīlu", country: "Latvia", flag: "🇱🇻", font: "Outfit", pron: "Es teh-vee mee-loo", speechLang: "lv-LV" },
+            { id: 60, lang: "Estonian", text: "Ma armastan sind", country: "Estonia", flag: "🇪🇪", font: "Outfit", pron: "Mah ar-mas-tan seend", speechLang: "et-EE" },
+            { id: 61, lang: "Icelandic", text: "Ég elska þig", country: "Iceland", flag: "🇮🇸", font: "Outfit", pron: "Yeh els-ka theeg", speechLang: "is-IS" },
+            { id: 62, lang: "Maltese", text: "Inħobbok", country: "Malta", flag: "🇲🇹", font: "Outfit", pron: "In-hob-bok", speechLang: "mt-MT" },
+            { id: 63, lang: "Macedonian", text: "Те сакам", country: "North Macedonia", flag: "🇲🇰", font: "Outfit", pron: "Te sakam", speechLang: "mk-MK" },
+            { id: 64, lang: "Slovenian", text: "Ljubim te", country: "Slovenia", flag: "🇸🇮", font: "Outfit", pron: "Lyoo-beem teh", speechLang: "sl-SI" },
+            { id: 65, lang: "Afrikaans", text: "Ek het jou lief", country: "South Africa", flag: "🇿🇦", font: "Outfit", pron: "Ek het yow leef", speechLang: "af-ZA" },
+            { id: 66, lang: "Zulu", text: "Ngiyakuthanda", country: "South Africa", flag: "🇿🇦", font: "Outfit", pron: "Ngee-yah-koo-tan-dah", speechLang: "zu-ZA" },
+            { id: 67, lang: "Yoruba", text: "Mo ní fẹ́ rẹ", country: "Nigeria", flag: "🇳🇬", font: "Outfit", pron: "Mo nee feh reh", speechLang: "yo-NG" },
+            { id: 68, lang: "Amharic", text: "እወድሃለሁ", country: "Ethiopia", flag: "🇪🇹", font: "sans-serif", pron: "Ewedihalehu", speechLang: "am-ET" },
+            { id: 69, lang: "Somali", text: "Waan ku meel dayaa", country: "Somalia", flag: "🇸🇴", font: "Outfit", pron: "Waan koo meel dayaa", speechLang: "so-SO" },
+            { id: 70, lang: "Mongolian", text: "Би чамд хайртай", country: "Mongolia", flag: "🇲🇳", font: "sans-serif", pron: "Bi chamd khairtai", speechLang: "mn-MN" },
+            { id: 71, lang: "Kazakh", text: "Мен сені сүйемін", country: "Kazakhstan", flag: "🇰🇿", font: "Outfit", pron: "Men seni suyemin", speechLang: "kk-KZ" },
+            { id: 72, lang: "Uzbek", text: "Men seni sevaman", country: "Uzbekistan", flag: "🇺🇿", font: "Outfit", pron: "Men seni sevaman", speechLang: "uz-UZ" },
+            { id: 73, lang: "Azerbaijani", text: "Mən səni sevirəm", country: "Azerbaijan", flag: "🇦🇿", font: "Outfit", pron: "Men seni sevirem", speechLang: "az-AZ" },
+            { id: 74, lang: "Nepali", text: "म तिमीलाई माया गर्छु", country: "Nepal", flag: "🇳🇵", font: "sans-serif", pron: "Ma timīlāī māyā garchhu", speechLang: "ne-NP" },
+            { id: 75, lang: "Sinhala", text: "මම ඔයාට ආදරෙයි", country: "Sri Lanka", flag: "🇱🇰", font: "sans-serif", pron: "Mama oyāṭa ādareyi", speechLang: "si-LK" },
+            { id: 76, lang: "Khmer", text: "ញុំស្រឡាញ់អ្នក", country: "Cambodia", flag: "🇰🇭", font: "sans-serif", pron: "Nhum srolanh neak", speechLang: "km-KH" },
+            { id: 77, lang: "Lao", text: "ຂ້ອຍຮັກເຈົ້າ", country: "Laos", flag: "🇱🇦", font: "sans-serif", pron: "Khoy hak chao", speechLang: "lo-LA" },
+            { id: 78, lang: "Burmese", text: "မင်းကိုချစ်တယ်", country: "Myanmar", flag: "🇲🇲", font: "sans-serif", pron: "Min ko chit te", speechLang: "my-MM" },
+            { id: 79, lang: "Tibetan", text: "nga khyed rang la dga' po yod", country: "Tibet", flag: "🏔️", font: "sans-serif", pron: "Nga khyed rang la dga' po yod", speechLang: "bo" },
+            { id: 80, lang: "Javanese", text: "Aku tresno karo kowe", country: "Java", flag: "🇮🇩", font: "Outfit", pron: "Ah-koo tres-no kah-ro ko-we", speechLang: "jw-ID" },
+            { id: 81, lang: "Sundanese", text: "Abdi bobogoh ka anjeun", country: "Sunda", flag: "🇮🇩", font: "Outfit", pron: "Ab-dee bo-bo-goh kah an-jeun", speechLang: "su-ID" },
+            { id: 82, lang: "Maori", text: "Aroha ahau ki a koe", country: "New Zealand", flag: "🇳🇿", font: "Outfit", pron: "Ah-ro-ha ah-hoo kee ah ko-e", speechLang: "mi-NZ" },
+            { id: 83, lang: "Samoan", text: "Ou te alofa ia te oe", country: "Samoa", flag: "🇼🇸", font: "Outfit", pron: "Oh-oo teh ah-lo-fah ee-ah teh oh-eh", speechLang: "sm-WS" },
+            { id: 84, lang: "Fijian", text: "Au domoni iko", country: "Fiji", flag: "🇫🇯", font: "Outfit", pron: "Ow do-mo-nee ee-ko", speechLang: "fj-FJ" },
+            { id: 85, lang: "Tahitian", text: "Ua here au ia oe", country: "Tahiti", flag: "🇵🇫", font: "Outfit", pron: "Oo-ah heh-reh ow ee-ah oh-eh", speechLang: "fr-PF" },
+            { id: 86, lang: "Basque", text: "Maite zaitut", country: "Basque Country", flag: "🇪🇸", font: "Outfit", pron: "My-teh zy-toot", speechLang: "eu-ES" },
+            { id: 87, lang: "Catalan", text: "T'estimo", country: "Catalonia", flag: "🇪🇸", font: "Outfit", pron: "Tehs-tee-mo", speechLang: "ca-ES" },
+            { id: 88, lang: "Galician", text: "Amote", country: "Galicia", flag: "🇪🇸", font: "Outfit", pron: "Ah-mo-teh", speechLang: "gl-ES" },
+            { id: 89, lang: "Luxembourgish", text: "Ech hunn dech gär", country: "Luxembourg", flag: "🇱🇺", font: "Outfit", pron: "Ekh hoon dekh gair", speechLang: "lb-LU" },
+            { id: 90, lang: "Frisian", text: "Ik hou fan dy", country: "Frisia", flag: "🇳🇱", font: "Outfit", pron: "Ik how fan dee", speechLang: "fy-NL" },
+            { id: 91, lang: "Yiddish", text: "איך ליב דיך", country: "Ashkenazi", flag: "✡️", font: "sans-serif", pron: "Ikh leeb dekh", speechLang: "yi" },
+            { id: 92, lang: "Guarani", text: "Rohayhu", country: "Paraguay", flag: "🇵🇾", font: "Outfit", pron: "Ro-hai-hoo", speechLang: "gn-PY" },
+            { id: 93, lang: "Quechua", text: "Canda munani", country: "Andes Region", flag: "🇵🇪", font: "Outfit", pron: "Kan-dah moo-nah-nee", speechLang: "qu-PE" },
+            { id: 94, lang: "Aymara", text: "Munassmawa", country: "Bolivia / Peru", flag: "🇧🇴", font: "Outfit", pron: "Moo-nas-mah-wah", speechLang: "ay-BO" },
+            { id: 95, lang: "Nahuatl", text: "Ni mits tLazohtla", country: "Mexico", flag: "🇲🇽", font: "Outfit", pron: "Nee meets tlah-zoh-tlah", speechLang: "es-MX" },
+            { id: 96, lang: "Klingon", text: "qamuSHa'", country: "Star Trek", flag: "🖖", font: "Outfit", pron: "Kkah-moosh-khah", speechLang: "en-US" },
+            { id: 97, lang: "Elvish", text: "Le melin", country: "Middle-earth", flag: "🧝", font: "Playfair Display", pron: "Lay meh-leen", speechLang: "en-GB" },
+            { id: 98, lang: "Tamil", text: "நான் உன்னை காதலிக்கிறேன்", country: "India", flag: "🇮🇳", font: "sans-serif", pron: "Nān unnai kādalikkirēn", speechLang: "ta-IN" },
+            { id: 99, lang: "Telugu", text: "నేను నిన్ను ప్రేమిస్తున్నాను", country: "India", flag: "🇮🇳", font: "sans-serif", pron: "Nēnu ninnu prēmistunnānu", speechLang: "te-IN" },
+            { id: 100, lang: "Kannada", text: "ನಾನು ನಿನ್ನಣ್ಣು ಪ್ರೀತಿಸುತ್ತೇನೆ", country: "India", flag: "🇮🇳", font: "sans-serif", pron: "Nānu ninnannu prītisuttēne", speechLang: "kn-IN" },
+            { id: 101, lang: "Malayalam", text: "ഞാൻ നിന്നെ സ്നേഹിക്കുന്നു", country: "India", flag: "🇮🇳", font: "sans-serif", pron: "Ñān ninne snēhikkunnu", speechLang: "ml-IN" },
+            { id: 102, lang: "Gujarati", text: "હું તને પ્રેમ કરૂં છું", country: "India", flag: "🇮🇳", font: "sans-serif", pron: "Hūṁ tanē prēma karūṁ chūṁ", speechLang: "gu-IN" },
+            { id: 103, lang: "Marathi", text: "माझे तुझ्यावर प्रेम आहे", country: "India", flag: "🇮🇳", font: "sans-serif", pron: "Mājhē tujhyāvara prēma āhē", speechLang: "mr-IN" },
+            { id: 104, lang: "Punjabi", text: "ਮੈਂ ਤੈਨੂੰ ਪਿਆਰ ਕਰਦਾ ਹਾਂ", country: "India", flag: "🇵🇰", font: "sans-serif", pron: "Main tainū pi'āra kardā hāṁ", speechLang: "pa-IN" },
+            { id: 105, lang: "Pashto", text: "زه درسره مینه لرم", country: "Afghanistan", flag: "🇦🇫", font: "Cairo", pron: "Za dar sara meena laram", speechLang: "ps-AF" },
+            { id: 106, lang: "Igbo", text: "A hụrụ m gị n'anya", country: "Nigeria", flag: "🇳🇬", font: "Outfit", pron: "Ah hoo-roo m gee nyahn-yah", speechLang: "ig-NG" },
+            { id: 107, lang: "Hausa", text: "Ina son ki", country: "West Africa", flag: "🇳🇬", font: "Outfit", pron: "Ee-nah son kee", speechLang: "ha-NG" },
+            { id: 108, lang: "Malagasy", text: "Tiako ianao", country: "Madagascar", flag: "🇲🇬", font: "Outfit", pron: "Tee-ah-ko ee-nah-oo", speechLang: "mg-MG" },
+            { id: 109, lang: "Belarusian", text: "Я цябе кахаю", country: "Belarus", flag: "🇧🇾", font: "Outfit", pron: "Ya tsiabie kakhayu", speechLang: "be-BY" },
+            { id: 110, lang: "Sign Language", text: "🤟 (I Love You)", country: "Universal", flag: "🤟", font: "sans-serif", pron: "I Love You", speechLang: "en-US" }
+        ];
+
+        const themes = [
+            { id: 'crimson', primary: '#ff2a5f', secondary: '#ff7597', glow: 'rgba(255, 42, 95, 0.22)' },
+            { id: 'rose', primary: '#e056fd', secondary: '#f78fb3', glow: 'rgba(224, 86, 253, 0.22)' },
+            { id: 'gold', primary: '#ffb703', secondary: '#ffe066', glow: 'rgba(255, 183, 3, 0.22)' },
+            { id: 'cyber', primary: '#00f5d4', secondary: '#7bf1a8', glow: 'rgba(0, 245, 212, 0.22)' }
+        ];
+        let currentThemeIdx = 0;
+
+        const heartWordsContainer = document.getElementById('heartWordsContainer');
+        const heartCanvas = document.getElementById('heartCanvas');
+        const bgCanvas = document.getElementById('bgCanvas');
+        const bgVideo = document.getElementById('bgVideo');
+        const statusText = document.getElementById('statusText');
+        const counterText = document.getElementById('counterText');
+        const progressBar = document.getElementById('progressBar');
+        const searchInput = document.getElementById('searchInput');
+        const btnClearSearch = document.getElementById('btnClearSearch');
+        const btnReplay = document.getElementById('btnReplay');
+        const btnMusic = document.getElementById('btnMusic');
+        const musicIcon = document.getElementById('musicIcon');
+        const btnTheme = document.getElementById('btnTheme');
+        const btnList = document.getElementById('btnList');
+        
+        const detailModal = document.getElementById('detailModal');
+        const detailCard = document.getElementById('detailCard');
+        const btnCloseDetail = document.getElementById('btnCloseDetail');
+        const detailFlag = document.getElementById('detailFlag');
+        const detailLang = document.getElementById('detailLang');
+        const detailCountry = document.getElementById('detailCountry');
+        const detailText = document.getElementById('detailText');
+        const detailPronunciation = document.getElementById('detailPronunciation');
+        const btnSpeak = document.getElementById('btnSpeak');
+        
+        const listModal = document.getElementById('listModal');
+        const btnCloseList = document.getElementById('btnCloseList');
+        const modalListContent = document.getElementById('modalListContent');
+
+        let audioCtx = null;
+        let activeSelectedItem = null;
+        let wasVideoMutedBeforeSpeech = true;
+
+        function initAudio() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+        }
+
+        function playHeartbeatSound(freqMultiplier = 1) {
+            initAudio();
+            if (!audioCtx) return;
+            try {
+                if (audioCtx.state === 'suspended') {
+                    audioCtx.resume();
+                }
+                const now = audioCtx.currentTime;
+                const osc1 = audioCtx.createOscillator();
+                const gain1 = audioCtx.createGain();
+                osc1.type = 'sine';
+                osc1.frequency.setValueAtTime(55 * freqMultiplier, now);
+                osc1.frequency.exponentialRampToValueAtTime(18 * freqMultiplier, now + 0.12);
+                gain1.gain.setValueAtTime(0.3, now);
+                gain1.gain.exponentialRampToValueAtTime(0.01, now + 0.12);
+                osc1.connect(gain1);
+                gain1.connect(audioCtx.destination);
+                osc1.start(now);
+                osc1.stop(now + 0.12);
+            } catch (e) {}
+        }
+
+        function speakLanguageText(item) {
+            playHeartbeatSound(1.3);
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                
+                // Pause background video sound while speaking
+                wasVideoMutedBeforeSpeech = bgVideo.muted;
+                bgVideo.muted = true;
+
+                const textToSpeak = item.pron || item.text;
+                const utterance = new SpeechSynthesisUtterance(textToSpeak);
+                utterance.lang = item.speechLang || 'en-US';
+                utterance.rate = 0.85;
+
+                const restoreVideoAudio = () => {
+                    if (!wasVideoMutedBeforeSpeech) {
+                        bgVideo.muted = false;
+                    }
+                };
+
+                utterance.onend = restoreVideoAudio;
+                utterance.onerror = restoreVideoAudio;
+
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        function getHeartPoint(t) {
+            const x = 16 * Math.pow(Math.sin(t), 3);
+            const y = -(13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t));
+            return { x, y };
+        }
+
+        function generate110HeartPositions() {
+            const positions = [];
+            const rings = [
+                { count: 48, scale: 1.05, yShift: 1.15 },
+                { count: 32, scale: 0.82, yShift: 0.95 },
+                { count: 18, scale: 0.58, yShift: 0.75 },
+                { count: 8,  scale: 0.36, yShift: 0.50 },
+                { count: 3,  scale: 0.18, yShift: 0.25 },
+                { count: 1,  scale: 0.0,  yShift: 0.0 }
+            ];
+
+            const isMobile = window.innerWidth < 640;
+            const scaleX = isMobile ? 10.2 : 18.5;
+            const scaleY = isMobile ? 9.8 : 17.0;
+
+            rings.forEach((ring, ringIdx) => {
+                for (let i = 0; i < ring.count; i++) {
+                    const angleOffset = ringIdx * 0.3;
+                    const t = (i / ring.count) * Math.PI * 2 + angleOffset;
+                    const pt = getHeartPoint(t);
+
+                    positions.push({
+                        x: pt.x * scaleX * ring.scale,
+                        y: (pt.y + ring.yShift) * scaleY * ring.scale
+                    });
+                }
+            });
+
+            return positions;
+        }
+
+        let bgParticles = [];
+        const bgCtx = bgCanvas.getContext('2d');
+
+        function initBackgroundCanvas() {
+            bgCanvas.width = window.innerWidth;
+            bgCanvas.height = window.innerHeight;
+            bgParticles = [];
+            const totalParticles = Math.floor((bgCanvas.width * bgCanvas.height) / 5000);
+
+            for (let i = 0; i < totalParticles; i++) {
+                bgParticles.push({
+                    x: Math.random() * bgCanvas.width,
+                    y: Math.random() * bgCanvas.height,
+                    size: Math.random() * 2 + 0.5,
+                    alpha: Math.random(),
+                    speedY: - (Math.random() * 0.3 + 0.1),
+                    speedX: (Math.random() - 0.5) * 0.15,
+                    isHeart: Math.random() < 0.15
+                });
+            }
+        }
+
+        function drawBackground() {
+            bgCtx.clearRect(0, 0, bgCanvas.width, bgCanvas.height);
+            const theme = themes[currentThemeIdx];
+
+            for (let p of bgParticles) {
+                p.y += p.speedY;
+                p.x += p.speedX;
+                if (p.y < 0) p.y = bgCanvas.height;
+                if (p.x < 0) p.x = bgCanvas.width;
+                if (p.x > bgCanvas.width) p.x = 0;
+
+                bgCtx.save();
+                bgCtx.globalAlpha = p.alpha * 0.6;
+                if (p.isHeart) {
+                    bgCtx.fillStyle = theme.primary;
+                    bgCtx.font = `${Math.floor(p.size * 4 + 5)}px sans-serif`;
+                    bgCtx.fillText('♥', p.x, p.y);
+                } else {
+                    bgCtx.beginPath();
+                    bgCtx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    bgCtx.fillStyle = `rgba(255, 230, 240, ${p.alpha})`;
+                    bgCtx.fill();
+                }
+                bgCtx.restore();
+            }
+            requestAnimationFrame(drawBackground);
+        }
+
+        const heartCtx = heartCanvas.getContext('2d');
+        let pulseAngle = 0;
+
+        function initHeartCanvas() {
+            const rect = heartCanvas.parentElement.getBoundingClientRect();
+            heartCanvas.width = rect.width;
+            heartCanvas.height = rect.height;
+        }
+
+        function drawHeartOutline() {
+            heartCtx.clearRect(0, 0, heartCanvas.width, heartCanvas.height);
+            
+            const centerX = heartCanvas.width / 2;
+            const centerY = heartCanvas.height / 2 - 2;
+            const isMobile = window.innerWidth < 640;
+            const size = Math.min(heartCanvas.width, heartCanvas.height) * (isMobile ? 0.023 : 0.028);
+
+            pulseAngle += 0.015;
+            const scale = 1 + Math.sin(pulseAngle) * 0.02;
+
+            heartCtx.save();
+            heartCtx.translate(centerX, centerY);
+            heartCtx.scale(scale, scale);
+
+            heartCtx.beginPath();
+            for (let t = 0; t <= Math.PI * 2; t += 0.03) {
+                const pt = getHeartPoint(t);
+                const x = pt.x * size * (isMobile ? 9.8 : 11.0);
+                const y = (pt.y + 1.2) * size * (isMobile ? 9.2 : 10.4);
+                if (t === 0) heartCtx.moveTo(x, y);
+                else heartCtx.lineTo(x, y);
+            }
+            heartCtx.closePath();
+
+            const theme = themes[currentThemeIdx];
+            heartCtx.strokeStyle = theme.primary;
+            heartCtx.lineWidth = 1.5;
+            heartCtx.shadowColor = theme.primary;
+            heartCtx.shadowBlur = 12;
+            heartCtx.globalAlpha = 0.35;
+            heartCtx.stroke();
+            heartCtx.restore();
+
+            requestAnimationFrame(drawHeartOutline);
+        }
+
+        let revealTimeouts = [];
+
+        function render110Phrases() {
+            heartWordsContainer.innerHTML = '';
+            revealTimeouts.forEach(clearTimeout);
+            revealTimeouts = [];
+
+            const positions = generate110HeartPositions();
+            const theme = themes[currentThemeIdx];
+            const isMobile = window.innerWidth < 640;
+
+            languagesData.forEach((item, index) => {
+                const el = document.createElement('div');
+                el.className = 'love-phrase';
+                el.dataset.id = item.id;
+                el.dataset.lang = item.lang.toLowerCase();
+                el.dataset.text = item.text.toLowerCase();
+                el.innerText = item.text;
+                el.style.fontFamily = `'${item.font}', sans-serif`;
+
+                const pos = positions[index];
+                el.style.left = `calc(50% + ${pos.x}px)`;
+                el.style.top = `calc(50% + ${pos.y}px)`;
+
+                let fontSize = isMobile ? '0.48rem' : '0.75rem';
+                if (index === 10) fontSize = isMobile ? '0.70rem' : '1.15rem';
+                else if (index < 16) fontSize = isMobile ? '0.58rem' : '0.88rem';
+                
+                el.style.fontSize = fontSize;
+                
+                const colorRatio = index / languagesData.length;
+                el.style.color = index === 10 ? '#ffffff' : (colorRatio > 0.45 ? theme.primary : theme.secondary);
+
+                el.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    openLanguageDetails(item);
+                });
+
+                heartWordsContainer.appendChild(el);
+            });
+
+            startSequential110Reveal();
+        }
+
+        function startSequential110Reveal() {
+            const phrases = heartWordsContainer.querySelectorAll('.love-phrase');
+            let count = 0;
+            progressBar.style.width = '0%';
+            counterText.innerText = `0 / 110`;
+
+            phrases.forEach((el, index) => {
+                const timeout = setTimeout(() => {
+                    el.classList.add('revealed');
+                    count++;
+                    
+                    const progressPct = (count / languagesData.length) * 100;
+                    progressBar.style.width = `${progressPct}%`;
+                    counterText.innerText = `${count} / 110`;
+
+                    const currentLang = languagesData[index];
+                    statusText.innerText = `${currentLang.flag} ${currentLang.lang}: "${currentLang.text}"`;
+
+                    if (count === languagesData.length) {
+                        setTimeout(() => {
+                            statusText.innerText = "❤️ All 110 languages revealed! Touch any word.";
+                        }, 500);
+                    }
+                }, index * 75 + 80);
+
+                revealTimeouts.push(timeout);
+            });
+        }
+
+        function openLanguageDetails(item) {
+            activeSelectedItem = item;
+            speakLanguageText(item);
+
+            detailFlag.innerText = item.flag;
+            detailLang.innerText = item.lang;
+            detailCountry.innerText = item.country;
+            detailText.innerText = item.text;
+            detailText.style.fontFamily = `'${item.font}', sans-serif`;
+            detailPronunciation.innerText = `Pronunciation: "${item.pron}"`;
+
+            const highlightedPrev = heartWordsContainer.querySelector('.highlighted');
+            if (highlightedPrev) highlightedPrev.classList.remove('highlighted');
+
+            const targetEl = heartWordsContainer.querySelector(`[data-id="${item.id}"]`);
+            if (targetEl) targetEl.classList.add('highlighted');
+
+            detailModal.classList.remove('hidden');
+            setTimeout(() => {
+                detailModal.classList.add('opacity-100');
+                detailCard.classList.remove('scale-95');
+                detailCard.classList.add('scale-100');
+            }, 10);
+        }
+
+        function closeLanguageDetails() {
+            detailModal.classList.remove('opacity-100');
+            detailCard.classList.remove('scale-100');
+            detailCard.classList.add('scale-95');
+            
+            const highlighted = heartWordsContainer.querySelector('.highlighted');
+            if (highlighted) highlighted.classList.remove('highlighted');
+
+            setTimeout(() => { detailModal.classList.add('hidden'); }, 300);
+        }
+
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase().trim();
+            const phrases = heartWordsContainer.querySelectorAll('.love-phrase');
+            
+            if (query.length > 0) {
+                btnClearSearch.classList.remove('hidden');
+                let matchCount = 0;
+                phrases.forEach(el => {
+                    if (el.dataset.lang.includes(query) || el.dataset.text.includes(query)) {
+                        el.classList.remove('dimmed');
+                        el.classList.add('highlighted');
+                        matchCount++;
+                    } else {
+                        el.classList.add('dimmed');
+                        el.classList.remove('highlighted');
+                    }
+                });
+                statusText.innerText = `Found ${matchCount} match(es)`;
+            } else {
+                btnClearSearch.classList.add('hidden');
+                phrases.forEach(el => el.classList.remove('dimmed', 'highlighted'));
+                statusText.innerText = "❤️ All 110 languages revealed!";
+            }
+        });
+
+        btnClearSearch.addEventListener('click', () => {
+            searchInput.value = '';
+            searchInput.dispatchEvent(new Event('input'));
+        });
+
+        btnSpeak.addEventListener('click', () => {
+            if (activeSelectedItem) speakLanguageText(activeSelectedItem);
+        });
+
+        function toggleVideoAudio(forcePlay = false) {
+            if (bgVideo.muted || forcePlay) {
+                bgVideo.muted = false;
+                bgVideo.play().then(() => {
+                    musicIcon.className = "fa-solid fa-volume-high text-xs text-pink-400";
+                }).catch(e => {});
+            } else {
+                bgVideo.muted = true;
+                musicIcon.className = "fa-solid fa-volume-xmark text-xs text-pink-200";
+            }
+        }
+
+        btnMusic.addEventListener('click', () => toggleVideoAudio());
+
+        function unlockAudio() {
+            if (bgVideo.muted) {
+                toggleVideoAudio(true);
+            }
+        }
+
+        document.body.addEventListener('touchstart', unlockAudio, { once: true });
+        document.body.addEventListener('click', unlockAudio, { once: true });
+
+        function populateModalList() {
+            modalListContent.innerHTML = '';
+            languagesData.forEach((item) => {
+                const row = document.createElement('div');
+                row.className = 'flex items-center justify-between p-2 rounded-xl bg-white/5 hover:bg-pink-500/15 transition border border-white/5 cursor-pointer';
+                row.innerHTML = `
+                    <div class="flex items-center gap-2 truncate">
+                        <span class="text-base">${item.flag}</span>
+                        <div class="truncate">
+                            <p class="font-bold text-white text-[11px] leading-tight">${item.lang}</p>
+                            <p class="text-[9px] text-pink-300/60">${item.country}</p>
+                        </div>
+                    </div>
+                    <div class="text-right pl-2">
+                        <p class="font-bold text-pink-300 text-xs" style="font-family:'${item.font}'">${item.text}</p>
+                    </div>
+                `;
+                row.addEventListener('click', () => {
+                    listModal.classList.remove('opacity-100');
+                    setTimeout(() => listModal.classList.add('hidden'), 300);
+                    openLanguageDetails(item);
+                });
+                modalListContent.appendChild(row);
+            });
+        }
+
+        btnReplay.addEventListener('click', render110Phrases);
+
+        btnTheme.addEventListener('click', () => {
+            currentThemeIdx = (currentThemeIdx + 1) % themes.length;
+            const theme = themes[currentThemeIdx];
+            document.documentElement.style.setProperty('--theme-primary', theme.primary);
+            document.documentElement.style.setProperty('--theme-secondary', theme.secondary);
+            document.documentElement.style.setProperty('--theme-glow-color', theme.glow);
+            render110Phrases();
+        });
+
+        btnList.addEventListener('click', () => {
+            populateModalList();
+            listModal.classList.remove('hidden');
+            setTimeout(() => listModal.classList.add('opacity-100'), 10);
+        });
+
+        btnCloseList.addEventListener('click', () => {
+            listModal.classList.remove('opacity-100');
+            setTimeout(() => listModal.classList.add('hidden'), 300);
+        });
+
+        btnCloseDetail.addEventListener('click', closeLanguageDetails);
+
+        detailModal.addEventListener('click', (e) => {
+            if (e.target === detailModal) closeLanguageDetails();
+        });
+
+        listModal.addEventListener('click', (e) => {
+            if (e.target === listModal) {
+                listModal.classList.remove('opacity-100');
+                setTimeout(() => listModal.classList.add('hidden'), 300);
+            }
+        });
+
+        window.addEventListener('resize', () => {
+            initBackgroundCanvas();
+            initHeartCanvas();
+        });
+
+        window.onload = function() {
+            initBackgroundCanvas();
+            initHeartCanvas();
+            drawBackground();
+            drawHeartOutline();
+            render110Phrases();
+            
+            bgVideo.play().then(() => {
+                bgVideo.muted = false;
+                musicIcon.className = "fa-solid fa-volume-high text-xs text-pink-400";
+            }).catch(e => {
+                bgVideo.muted = true;
+                bgVideo.play();
+            });
+        };
+    </script>
+</body>
+</html>
